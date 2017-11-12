@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import static com.mygdx.game.AdditionalLibrary.*;
@@ -77,14 +78,14 @@ public class MyFisrtGame extends ApplicationAdapter {
 			}
 		}
 		// hit on dragon
-//		for (int i = 0; i < amountOfBat; i++) {
-//			bats[i].update();
-//			if (bats[i].hitArea.contains(dragon.position)) {
-//				dragon.takeDamage();
-//				bats[i].recreate();
-//				break;
-//			}
-//		}
+		for (int i = 0; i < amountOfBat; i++) {
+			bats[i].update();
+			if (dragon.hitArea.overlaps(bats[i].hitArea)) {
+                bats[i].recreate();
+				dragon.takeDamage();
+                amountOfFire = 0;
+			}
+		}
 	}
 	
 	@Override

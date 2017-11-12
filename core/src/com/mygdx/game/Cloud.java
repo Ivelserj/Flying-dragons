@@ -19,7 +19,7 @@ public class Cloud {
     public Cloud() {
         texture = new Texture(pictureWithCloud);
         position = new Vector2((float) Math.random() * screenWidth + screenWidth, (float) Math.random() * screenHight);
-        scale = 2.0f * (float) (Math.random() * cloudSize);
+        scale = 2.0f * (float) (Math.random() * pictureWithCloudSize);
         speed = 0.3f * (float) (Math.random() * (scale));
         transparency = (float) Math.random();
     }
@@ -31,13 +31,13 @@ public class Cloud {
     public void recreate() {
         position.x = screenWidth + (float) Math.random() * screenWidth;
         position.y = (float) Math.random() * screenHight;
-        scale = 1.0f * (float) (Math.random() * cloudSize);
+        scale = 1.0f * (float) (Math.random() * pictureWithCloudSize);
         speed = 0.3f * (float) (Math.random() * (scale));
     }
 
     public void update() {
         position.x -= speed;
-        if (position.x < - (cloudSize * 2)) {
+        if (position.x < - (pictureWithCloudSize * 2)) {
             recreate();
         }
     }

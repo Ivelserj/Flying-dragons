@@ -25,7 +25,6 @@ public class Fire {
     }
 
     public void deactivate() {
-
         active = false;
     }
 
@@ -34,12 +33,12 @@ public class Fire {
         position.set(x, y);
     }
     public void render(SpriteBatch batch) {
-        batch.draw(texture, position.x - ((int) (fireSize/2)), position.y - ((int)(fireSize/2)));
+        batch.draw(texture, position.x - ((int) (pictureWithFireSize/2)), position.y - ((int)(pictureWithFireSize/2)));
     }
 
     public void update() {
         position.x += speed;
-        if (position.x > screenWidth) {
+        if (position.x > screenWidth - dragonRangeOfFire) {
             deactivate();
         }
     }

@@ -17,7 +17,6 @@ public class Dragon {
     Vector2 position;
     Texture texture;
     float speed;
-    int fireRate;
     int fireCounter;
     int hp;
     Circle hitArea;
@@ -26,16 +25,15 @@ public class Dragon {
         texture = new Texture(pictureWithDragon);
         position = new Vector2(100, 328);
         speed = 10.0f;
-        fireRate = 4;
         fireCounter = 0;
         hp = dragonHit;
-        hitArea = new Circle(position, ((int)(dragonSize/2)));
+        hitArea = new Circle(position, ((int)(pictureWithDragonSize/2)));
     }
 
     public void takeDamage() {
         hp--;
-        if (hp <= 0) {
-            gameOver();
+        if (hp == 0) {
+            texture = new Texture(pictureWithDefeatedDragon);
         }
     }
 
@@ -56,37 +54,37 @@ public class Dragon {
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
             position.y += speed;
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.L)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.F)) {
             fireCounter++;
-            if (fireCounter >= fireRate) {
+            if (fireCounter >= dragonFireRate) {
                 fireCounter = 0;
                  fire();
             }
         }
         if (Gdx.input.isTouched()) {
-            if (position.x + ((int) (dragonSize / 2)) > Gdx.input.getX()) {
+            if (position.x + ((int) (pictureWithDragonSize / 2)) > Gdx.input.getX()) {
                 position.x -= speed;
             }
-            if (position.x + ((int) (dragonSize / 2)) < Gdx.input.getX()) {
+            if (position.x + ((int) (pictureWithDragonSize / 2)) < Gdx.input.getX()) {
                 position.x += speed;
             }
-            if (position.y + ((int) (dragonSize / 2)) > screenWidth - Gdx.input.getY()) {
+            if (position.y + ((int) (pictureWithDragonSize / 2)) > screenWidth - Gdx.input.getY()) {
                 position.y -= speed;
             }
-            if (position.y + ((int) (dragonSize / 2)) < screenWidth - Gdx.input.getY()) {
+            if (position.y + ((int) (pictureWithDragonSize / 2)) < screenWidth - Gdx.input.getY()) {
                 position.y += speed;
             }
         }
         if (position.x < 0) {
             position.x = 0;
         }
-        if (position.x > (screenWidth - dragonSize)) {
-            position.x = (screenWidth - dragonSize);
+        if (position.x > (screenWidth - pictureWithDragonSize)) {
+            position.x = (screenWidth - pictureWithDragonSize);
         }
         if (position.y > screenHight) {
-            position.y = -((int) (dragonSize / 2));
+            position.y = -((int) (pictureWithDragonSize / 2));
         }
-        if (position.y < -((int) (dragonSize / 2))) {
+        if (position.y < -((int) (pictureWithDragonSize / 2))) {
             position.y = screenHight;
         }
     }
@@ -94,7 +92,7 @@ public class Dragon {
         public void fire() {
             for (int i = 0; i < amountOfFire; i++) {
                 if (!MyFisrtGame.fires[i].active) {
-                    MyFisrtGame.fires[i].activate(position.x + ((int)((dragonSize/3)*2)), position.y + ((int)(dragonSize/2)));
+                    MyFisrtGame.fires[i].activate(position.x + ((int)((pictureWithDragonSize))), position.y + ((int)(pictureWithDragonSize/2)));
                     break;
                 }
             }
