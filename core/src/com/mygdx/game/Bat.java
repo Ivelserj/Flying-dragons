@@ -1,0 +1,67 @@
+package com.mygdx.game;
+
+
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Circle;
+import com.badlogic.gdx.math.Vector2;
+
+import static com.mygdx.game.AdditionalLibrary.*;
+
+/**
+ * Created by Ivelserj on 05.11.2017.
+ */
+
+public class Bat {
+    static Texture texture;
+    Vector2 position;
+    float speed;
+    float scale;
+    int hp;
+    int maxHp;
+    Circle hitArea;
+
+    public Bat() {
+        if (texture == null) {
+            texture = new Texture(pictureWithBat);
+        }
+        position = new Vector2((float) Math.random() * screenWidth + screenWidth, (float) Math.random() * screenHight);
+        speed = 1.0f + (3 - maxHp);
+        hp = maxHp;
+        scale = 1.f;
+//        scale = 1.f + (float) Math.random() * maxHp;
+        hitArea = new Circle(position, ((int)(batSize/2)));
+    }
+
+    public void recreate() {
+        position.x = screenWidth * 2;
+        position.y = (float) Math.random() * (screenHight - (scale));
+        speed = 1.0f + (3 - maxHp);
+        scale = 1.f;
+//        scale = 0.8f + 1.2f * (float) Math.random();
+        maxHp = 1 + (int) (Math.random() * 2);
+        hp = maxHp;
+        scale = 1.f;
+//        scale = 1.f + (float) Math.random() * maxHp;
+        hitArea.radius = ((int)(batSize/2));
+    }
+
+    public void takeDamage() {
+        hp--;
+        if (hp <= 0) {
+            recreate();
+        }
+    }
+
+    public void render(SpriteBatch batch) {
+        batch.draw(texture, position.x - ((int)(batSize/2)), position.y - ((int)(batSize/2)), ((int)(batSize/2)), ((int)(batSize/2)), batSize, batSize, scale, scale, 0, 0, 0, batSize, batSize, false, false);
+    }
+
+    public void update() {
+        position.x -= speed;
+        if (position.x < -200) {
+            recreate();
+        }
+        hitArea.setPosition(position);
+    }
+}
