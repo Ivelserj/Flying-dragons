@@ -15,14 +15,14 @@ import static com.mygdx.game.AdditionalLibrary.*;
 
 public class Dragon {
     Vector2 position;
-    Texture texture;
+    static Texture dragonTexture;
     float speed;
     int fireCounter;
     int hp;
     Circle hitArea;
 
     public Dragon() {
-        texture = new Texture(pictureWithDragon);
+        dragonTexture = new Texture(pictureWithDragon);
         position = new Vector2(100, 328);
         speed = 10.0f;
         fireCounter = 0;
@@ -33,59 +33,61 @@ public class Dragon {
     public void takeDamage() {
         hp--;
         if (hp == 0) {
-            texture = new Texture(pictureWithDefeatedDragon);
+            gameOver();
         }
     }
 
     public void render(SpriteBatch batch) {
-        batch.draw(texture, position.x, position.y);
+        batch.draw(dragonTexture, position.x, position.y);
     }
 
     public void update() {
-        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-            position.x -= speed;
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-            position.x += speed;
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-            position.y -= speed;
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-            position.y += speed;
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.F)) {
-            fireCounter++;
-            if (fireCounter >= dragonFireRate) {
-                fireCounter = 0;
-                 fire();
-            }
-        }
-        if (Gdx.input.isTouched()) {
-            if (position.x + ((int) (pictureWithDragonSize / 2)) > Gdx.input.getX()) {
+        if (dragonIsLive){
+            if (Gdx.input.isKeyPressed(Input.Keys.A)) {
                 position.x -= speed;
             }
-            if (position.x + ((int) (pictureWithDragonSize / 2)) < Gdx.input.getX()) {
+            if (Gdx.input.isKeyPressed(Input.Keys.D)) {
                 position.x += speed;
             }
-            if (position.y + ((int) (pictureWithDragonSize / 2)) > screenWidth - Gdx.input.getY()) {
+            if (Gdx.input.isKeyPressed(Input.Keys.S)) {
                 position.y -= speed;
             }
-            if (position.y + ((int) (pictureWithDragonSize / 2)) < screenWidth - Gdx.input.getY()) {
+            if (Gdx.input.isKeyPressed(Input.Keys.W)) {
                 position.y += speed;
             }
-        }
-        if (position.x < 0) {
-            position.x = 0;
-        }
-        if (position.x > (screenWidth - pictureWithDragonSize)) {
-            position.x = (screenWidth - pictureWithDragonSize);
-        }
-        if (position.y > screenHight) {
-            position.y = -((int) (pictureWithDragonSize / 2));
-        }
-        if (position.y < -((int) (pictureWithDragonSize / 2))) {
-            position.y = screenHight;
+            if (Gdx.input.isKeyPressed(Input.Keys.F)) {
+                fireCounter++;
+                if (fireCounter >= dragonFireRate) {
+                    fireCounter = 0;
+                    fire();
+                }
+            }
+            if (Gdx.input.isTouched()) {
+                if (position.x + ((int) (pictureWithDragonSize / 2)) > Gdx.input.getX()) {
+                    position.x -= speed;
+                }
+                if (position.x + ((int) (pictureWithDragonSize / 2)) < Gdx.input.getX()) {
+                    position.x += speed;
+                }
+                if (position.y + ((int) (pictureWithDragonSize / 2)) > screenWidth - Gdx.input.getY()) {
+                    position.y -= speed;
+                }
+                if (position.y + ((int) (pictureWithDragonSize / 2)) < screenWidth - Gdx.input.getY()) {
+                    position.y += speed;
+                }
+            }
+            if (position.x < 0) {
+                position.x = 0;
+            }
+            if (position.x > (screenWidth - pictureWithDragonSize)) {
+                position.x = (screenWidth - pictureWithDragonSize);
+            }
+            if (position.y > screenHight) {
+                position.y = -((int) (pictureWithDragonSize / 2));
+            }
+            if (position.y < -((int) (pictureWithDragonSize / 2))) {
+                position.y = screenHight;
+            }
         }
     }
 

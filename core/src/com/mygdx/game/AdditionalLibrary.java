@@ -1,5 +1,7 @@
 package com.mygdx.game;
 
+
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
@@ -7,14 +9,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  */
 
 public class AdditionalLibrary {
-    public static String gameName = "Dragon riders";
+
+    public static String gameName = "FLYING DRAGONS";
     // game screen size
     public static int screenHight = 720;
     public static int screenWidth = 1280;
     // description of the dragon
     static String pictureWithDragon = "toothless.png";
-    static String pictureWithDefeatedDragon = "defeatedToothless.png";
-    static int pictureWithDragonSize = 304;
+    static int pictureWithDragonSize = 250;
     static int dragonRangeOfFire = 300;
     static int dragonFireRate = 5;
     static int dragonHit = 5;
@@ -34,8 +36,12 @@ public class AdditionalLibrary {
     static String pictureWithWitch = "witch.png";
     static int pictureWithWitchwitchSize = 100;
     static int amountOfWitch = 10;
-
-    SpriteBatch batch;
+    // parametr for death of dragon
+    static boolean dragonIsLive = true;
+    static boolean createClouds = true;
+    static boolean createBats = true;
+    static String pictureWithDefeatedDragon = "defeatedToothless.png";
+    static String pictureGameOver = "gameOver.jpg";
 
     public static Object createObjects(Object[] object, int amountOfObject, String className) {
         for (int i = 0; i < amountOfObject; i++) {
@@ -45,8 +51,12 @@ public class AdditionalLibrary {
         }
         return object;
     }
-    public static void gameOver(){
 
+    public static void gameOver() {
+        Background.backgroundTexture = new Texture(pictureGameOver);
+        Dragon.dragonTexture = new Texture(pictureWithDefeatedDragon);
+        dragonIsLive = false;
+        createClouds = false;
+        createBats = false;
     }
-
 }
