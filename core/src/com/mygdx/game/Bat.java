@@ -58,10 +58,12 @@ public class Bat {
     }
 
     public void update() {
-        position.x -= speed;
-        if (position.x < -300) {
-            recreate();
+        if (createClouds) {
+            position.x -= speed;
+            if (position.x < -300) {
+                recreate();
+            }
+            hitArea.setPosition(position);
         }
-        hitArea.setPosition(position);
     }
 }

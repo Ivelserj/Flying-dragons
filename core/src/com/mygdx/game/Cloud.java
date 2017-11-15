@@ -36,9 +36,12 @@ public class Cloud {
     }
 
     public void update() {
-        position.x -= speed;
-        if (position.x < - (pictureWithCloudSize * 2)) {
-            recreate();
+        if (createBats){
+            position.x -= speed;
+                if (position.x < -(pictureWithCloudSize * 2)) {
+                    recreate();
+                }
         }
     }
+
 }

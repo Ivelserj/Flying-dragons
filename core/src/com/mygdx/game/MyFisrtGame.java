@@ -40,6 +40,7 @@ public class MyFisrtGame extends ApplicationAdapter {
 		update();
 		batch.begin();
 		background.render(batch);
+
 		for (int i = 0; i < amountOfCloud; i++) {
 			clouds[i].render(batch);
 		}
