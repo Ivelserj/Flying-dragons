@@ -5,7 +5,6 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import static com.mygdx.game.AdditionalLibrary.*;
 import com.mygdx.game.MyFisrtGame;
 
-import javax.swing.plaf.synth.SynthOptionPaneUI;
 
 public class DesktopLauncher {
 

@@ -30,7 +30,7 @@ public class Bat {
         hp = maxHp;
         scale = 1.f;
 //        scale = 1.f + (float) Math.random() * maxHp;
-        hitArea = new Circle(position, ((int)(batSize/2)));
+        hitArea = new Circle(position, ((int)(pictureWithBatSize/2)));
     }
 
     public void recreate() {
@@ -43,7 +43,7 @@ public class Bat {
         hp = maxHp;
         scale = 1.f;
 //        scale = 1.f + (float) Math.random() * maxHp;
-        hitArea.radius = ((int)(batSize/2));
+        hitArea.radius = ((int)(pictureWithBatSize/2));
     }
 
     public void takeDamage() {
@@ -54,12 +54,12 @@ public class Bat {
     }
 
     public void render(SpriteBatch batch) {
-        batch.draw(texture, position.x - ((int)(batSize/2)), position.y - ((int)(batSize/2)), ((int)(batSize/2)), ((int)(batSize/2)), batSize, batSize, scale, scale, 0, 0, 0, batSize, batSize, false, false);
+        batch.draw(texture, position.x - ((int)(pictureWithBatSize/2)), position.y - ((int)(pictureWithBatSize/2)), ((int)(pictureWithBatSize/2)), ((int)(pictureWithBatSize/2)), pictureWithBatSize, pictureWithBatSize, scale, scale, 0, 0, 0, pictureWithBatSize, pictureWithBatSize, false, false);
     }
 
     public void update() {
         position.x -= speed;
-        if (position.x < -200) {
+        if (position.x < -300) {
             recreate();
         }
         hitArea.setPosition(position);
